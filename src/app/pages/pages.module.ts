@@ -6,6 +6,7 @@ import { GraphOneComponent } from './graph-one/graph-one.component';
 import { PagesComponent } from './pages.component';
 import { SharedModule } from '../shared/shared.module';
 import { AppRoutingModule } from '../app-routing.module';
+import { NopagefoundComponent } from './nopagefound/nopagefound.component';
 
 @NgModule({
   declarations: [
@@ -13,12 +14,14 @@ import { AppRoutingModule } from '../app-routing.module';
     ProgressComponent,
     GraphOneComponent,
     PagesComponent,
+    NopagefoundComponent,
   ],
   exports: [
     DashboardComponent,
     ProgressComponent,
     GraphOneComponent,
     PagesComponent,
+    NopagefoundComponent,
   ],
   imports: [CommonModule, SharedModule, AppRoutingModule],
 })
