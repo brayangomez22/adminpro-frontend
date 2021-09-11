@@ -7,13 +7,12 @@ import { GraphOneComponent } from './graph-one/graph-one.component';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'dashboard',
     component: PagesComponent,
     children: [
-      { path: 'dashboard', component: DashboardComponent },
+      { path: '', component: DashboardComponent },
       { path: 'progress', component: ProgressComponent },
       { path: 'graphOne', component: GraphOneComponent },
-      { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
     ],
   },
 ];
