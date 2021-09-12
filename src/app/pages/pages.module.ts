@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { ChartsModule } from 'ng2-charts';
-
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from '../app-routing.module';
 import { SharedModule } from '../shared/shared.module';
@@ -31,7 +29,6 @@ import { NopagefoundComponent } from './nopagefound/nopagefound.component';
   ],
   imports: [
     CommonModule,
-    ChartsModule,
     FormsModule,
     SharedModule,
     ComponentsModule,
