@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from '../app-routing.module';
 import { SharedModule } from '../shared/shared.module';
+import { ComponentsModule } from '../components/components.module';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProgressComponent } from './progress/progress.component';
@@ -26,6 +27,12 @@ import { NopagefoundComponent } from './nopagefound/nopagefound.component';
     PagesComponent,
     NopagefoundComponent,
   ],
-  imports: [CommonModule, FormsModule, SharedModule, AppRoutingModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    SharedModule,
+    ComponentsModule,
+    AppRoutingModule,
+  ],
 })
 export class PagesModule {}
