@@ -11,6 +11,7 @@ import { ProgressComponent } from './progress/progress.component';
 import { GraphOneComponent } from './graph-one/graph-one.component';
 import { PagesComponent } from './pages.component';
 import { NopagefoundComponent } from './nopagefound/nopagefound.component';
+import { AccountSettingsComponent } from './account-settings/account-settings.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { NopagefoundComponent } from './nopagefound/nopagefound.component';
     GraphOneComponent,
     PagesComponent,
     NopagefoundComponent,
+    AccountSettingsComponent,
   ],
   exports: [
     DashboardComponent,
@@ -26,6 +28,7 @@ import { NopagefoundComponent } from './nopagefound/nopagefound.component';
     GraphOneComponent,
     PagesComponent,
     NopagefoundComponent,
+    AccountSettingsComponent,
   ],
   imports: [
     CommonModule,
