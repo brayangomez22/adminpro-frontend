@@ -12,6 +12,7 @@ import { GraphOneComponent } from './graph-one/graph-one.component';
 import { PagesComponent } from './pages.component';
 import { NopagefoundComponent } from './nopagefound/nopagefound.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
+import { PromisesComponent } from './promises/promises.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
     PagesComponent,
     NopagefoundComponent,
     AccountSettingsComponent,
+    PromisesComponent,
   ],
   exports: [
     DashboardComponent,
@@ -29,6 +31,7 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
     PagesComponent,
     NopagefoundComponent,
     AccountSettingsComponent,
+    PromisesComponent,
   ],
   imports: [
     CommonModule,
