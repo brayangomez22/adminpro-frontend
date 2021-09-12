@@ -6,6 +6,7 @@ import { ProgressComponent } from './progress/progress.component';
 import { GraphOneComponent } from './graph-one/graph-one.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { PromisesComponent } from './promises/promises.component';
+import { RxjsComponent } from './rxjs/rxjs.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,7 @@ const routes: Routes = [
       { path: 'progress', component: ProgressComponent },
       { path: 'graphOne', component: GraphOneComponent },
       { path: 'promises', component: PromisesComponent },
+      { path: 'rxjs', component: RxjsComponent },
       { path: 'account-settings', component: AccountSettingsComponent },
     ],
   },

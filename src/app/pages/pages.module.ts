@@ -13,6 +13,7 @@ import { PagesComponent } from './pages.component';
 import { NopagefoundComponent } from './nopagefound/nopagefound.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { PromisesComponent } from './promises/promises.component';
+import { RxjsComponent } from './rxjs/rxjs.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { PromisesComponent } from './promises/promises.component';
     NopagefoundComponent,
     AccountSettingsComponent,
     PromisesComponent,
+    RxjsComponent,
   ],
   exports: [
     DashboardComponent,
@@ -32,6 +34,7 @@ import { PromisesComponent } from './promises/promises.component';
     NopagefoundComponent,
     AccountSettingsComponent,
     PromisesComponent,
+    RxjsComponent,
   ],
   imports: [
     CommonModule,
