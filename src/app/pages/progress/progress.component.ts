@@ -5,4 +5,15 @@ import { Component } from '@angular/core';
   templateUrl: './progress.component.html',
   styleUrls: ['./progress.component.css'],
 })
-export class ProgressComponent {}
+export class ProgressComponent {
+  progressOne: number = 25;
+  progressTwo: number = 35;
+
+  get getProgressOne() {
+    return `${this.progressOne}%`;
+  }
+
+  get getProgressTwo() {
+    return `${this.progressTwo}%`;
+  }
+}
