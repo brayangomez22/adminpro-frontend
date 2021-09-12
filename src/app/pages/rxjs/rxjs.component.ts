@@ -10,8 +10,18 @@ import { retry } from 'rxjs/operators';
 })
 export class RxjsComponent {
   constructor() {
+    this.sendObservable()
+      .pipe(retry())
+      .subscribe(
+        (value) => console.log('Subs:', value),
+        (err) => console.warn('Error:', err),
+        () => console.info('Obs Finished')
+      );
+  }
+
+  sendObservable(): Observable<number> {
     let i = -1;
-    const obs$ = new Observable((observer) => {
+    return new Observable<number>((observer) => {
       const interval = setInterval(() => {
         i++;
         observer.next(i);
@@ -25,12 +35,6 @@ export class RxjsComponent {
           observer.error('Error Example');
         }
       }, 1000);
-    })
-      .pipe(retry())
-      .subscribe(
-        (value) => console.log('Subs:', value),
-        (err) => console.warn('Error:', err),
-        () => console.info('Obs Finished')
-      );
+    });
   }
 }
