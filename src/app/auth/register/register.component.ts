@@ -7,6 +7,10 @@ import {
   ValidationErrors,
   ValidatorFn,
 } from '@angular/forms';
+import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
+
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-register',
@@ -17,7 +21,11 @@ export class RegisterComponent {
   public registerForm!: FormGroup;
   public formSubmitted = false;
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private router: Router,
+    private fb: FormBuilder,
+    private _userService: UserService
+  ) {
     this.createReactiveForm();
   }
 
@@ -38,13 +46,17 @@ export class RegisterComponent {
 
   public createUser(): void {
     this.formSubmitted = true;
-    console.log(this.registerForm);
 
-    if (this.registerForm.valid) {
-      console.log('pepe');
-    } else {
-      console.log('pepe2');
+    if (this.registerForm.invalid) {
+      return;
     }
+
+    this._userService.createUser(this.registerForm.value).subscribe(
+      (resp) => {
+        this.router.navigateByUrl('/');
+      },
+      (err) => Swal.fire('Error', err.error.msg, 'error')
+    );
   }
 
   public invalidField(field: string): boolean {

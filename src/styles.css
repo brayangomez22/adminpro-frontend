@@ -3,3 +3,15 @@
 #themecolors .selector {
   cursor: pointer;
 }
+
+.cursor {
+  cursor: pointer;
+}
+
+#google-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 20px;
+}
