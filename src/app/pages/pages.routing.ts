@@ -7,6 +7,7 @@ import { GraphOneComponent } from './graph-one/graph-one.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { PromisesComponent } from './promises/promises.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
+import { ProfileComponent } from './profile/profile.component';
 import { AuthGuard } from '../guards/auth.guard';
 
 const routes: Routes = [
@@ -31,12 +32,17 @@ const routes: Routes = [
         component: PromisesComponent,
         data: { title: 'Promises' },
       },
-      { path: 'rxjs', component: RxjsComponent, data: { title: 'RxJs' } },
+      {
+        path: 'profile',
+        component: ProfileComponent,
+        data: { title: 'My Profile' },
+      },
       {
         path: 'account-settings',
         component: AccountSettingsComponent,
         data: { title: 'Account Settings' },
       },
+      { path: 'rxjs', component: RxjsComponent, data: { title: 'RxJs' } },
     ],
   },
 ];

@@ -8,6 +8,7 @@ import { environment } from '../../environments/environment';
 
 import { RegisterForm } from '../interfaces/register-form.interface';
 import { LoginForm } from '../interfaces/login-form.interface';
+import { User } from '../models/user.model';
 
 declare const gapi: any;
 
@@ -17,6 +18,7 @@ declare const gapi: any;
 export class UserService {
   private base_url = environment.base_url;
   public auth2: any;
+  public user!: User;
 
   constructor(
     private http: HttpClient,
@@ -24,6 +26,14 @@ export class UserService {
     private ngZone: NgZone
   ) {
     this.googleInit();
+  }
+
+  get token(): string {
+    return localStorage.getItem('token') || '';
+  }
+
+  get uid(): string {
+    return this.user.uid || '';
   }
 
   public googleInit() {
@@ -41,15 +51,18 @@ export class UserService {
   }
 
   public validateToken(): Observable<boolean> {
-    const token = localStorage.getItem('token') || '';
-
     return this.http
       .get(`${this.base_url}/login/renew`, {
-        headers: { 'x-token': token },
+        headers: { 'x-token': this.token },
       })
       .pipe(
-        tap((resp: any) => localStorage.setItem('token', resp.token)),
-        map((resp) => true),
+        map((resp: any) => {
+          const { name, email, role, google, img, uid } = resp.user;
+          this.user = new User(name, email, '', img, google, role, uid);
+
+          localStorage.setItem('token', resp.token);
+          return true;
+        }),
         catchError((error) => of(false))
       );
   }
@@ -58,6 +71,21 @@ export class UserService {
     return this.http
       .post(`${this.base_url}/users`, formDate)
       .pipe(tap((resp: any) => localStorage.setItem('token', resp.token)));
+  }
+
+  public updateUser(formDate: {
+    name: string;
+    email: string;
+    role: string | undefined;
+  }) {
+    formDate = {
+      ...formDate,
+      role: this.user.role,
+    };
+
+    return this.http.put(`${this.base_url}/users/${this.uid}`, formDate, {
+      headers: { 'x-token': this.token },
+    });
   }
 
   public loginUser(formDate: LoginForm) {
