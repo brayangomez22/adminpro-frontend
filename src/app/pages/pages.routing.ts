@@ -10,6 +10,11 @@ import { RxjsComponent } from './rxjs/rxjs.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AuthGuard } from '../guards/auth.guard';
 
+// maintenance
+import { UsersComponent } from './maintenance/users/users.component';
+import { HospitalsComponent } from './maintenance/hospitals/hospitals.component';
+import { DoctorsComponent } from './maintenance/doctors/doctors.component';
+
 const routes: Routes = [
   {
     path: 'dashboard',
@@ -43,6 +48,23 @@ const routes: Routes = [
         data: { title: 'Account Settings' },
       },
       { path: 'rxjs', component: RxjsComponent, data: { title: 'RxJs' } },
+
+      // maintenance
+      {
+        path: 'user',
+        component: UsersComponent,
+        data: { title: 'Application users' },
+      },
+      {
+        path: 'hospitals',
+        component: HospitalsComponent,
+        data: { title: 'Application hospitals' },
+      },
+      {
+        path: 'doctors',
+        component: DoctorsComponent,
+        data: { title: 'Application doctors' },
+      },
     ],
   },
 ];

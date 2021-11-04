@@ -9,6 +9,7 @@ import { environment } from '../../environments/environment';
 import { RegisterForm } from '../interfaces/register-form.interface';
 import { LoginForm } from '../interfaces/login-form.interface';
 import { User } from '../models/user.model';
+import { LoadUsers } from '../interfaces/load-users.interface';
 
 declare const gapi: any;
 
@@ -36,6 +37,12 @@ export class UserService {
     return this.user.uid || '';
   }
 
+  get headers() {
+    return {
+      headers: { 'x-token': this.token },
+    };
+  }
+
   public googleInit() {
     return new Promise<void>((resolve, reject) => {
       gapi.load('auth2', () => {
@@ -51,20 +58,16 @@ export class UserService {
   }
 
   public validateToken(): Observable<boolean> {
-    return this.http
-      .get(`${this.base_url}/login/renew`, {
-        headers: { 'x-token': this.token },
-      })
-      .pipe(
-        map((resp: any) => {
-          const { name, email, role, google, img, uid } = resp.user;
-          this.user = new User(name, email, '', img, google, role, uid);
+    return this.http.get(`${this.base_url}/login/renew`, this.headers).pipe(
+      map((resp: any) => {
+        const { name, email, role, google, img, uid } = resp.user;
+        this.user = new User(name, email, '', img, google, role, uid);
 
-          localStorage.setItem('token', resp.token);
-          return true;
-        }),
-        catchError((error) => of(false))
-      );
+        localStorage.setItem('token', resp.token);
+        return true;
+      }),
+      catchError((error) => of(false))
+    );
   }
 
   public createUser(formDate: RegisterForm) {
@@ -83,9 +86,11 @@ export class UserService {
       role: this.user.role,
     };
 
-    return this.http.put(`${this.base_url}/users/${this.uid}`, formDate, {
-      headers: { 'x-token': this.token },
-    });
+    return this.http.put(
+      `${this.base_url}/users/${this.uid}`,
+      formDate,
+      this.headers
+    );
   }
 
   public loginUser(formDate: LoginForm) {
@@ -107,5 +112,10 @@ export class UserService {
         this.router.navigateByUrl('/login');
       });
     });
+  }
+
+  public loadUsers(fron: number = 0) {
+    const url = `${this.base_url}/users?from=${fron}`;
+    return this.http.get<LoadUsers>(url, this.headers);
   }
 }
