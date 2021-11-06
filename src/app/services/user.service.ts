@@ -116,6 +116,36 @@ export class UserService {
 
   public loadUsers(fron: number = 0) {
     const url = `${this.base_url}/users?from=${fron}`;
-    return this.http.get<LoadUsers>(url, this.headers);
+    return this.http.get<LoadUsers>(url, this.headers).pipe(
+      map((resp) => {
+        const users = resp.users.map(
+          (user) =>
+            new User(
+              user.name,
+              user.email,
+              '',
+              user.img,
+              user.google,
+              user.role,
+              user.uid
+            )
+        );
+
+        return {
+          total: resp.total,
+          users,
+        };
+      })
+    );
+  }
+
+  public deleteUser(user: User) {
+    const url = `${this.base_url}/users/${user.uid}`;
+    return this.http.delete(url, this.headers);
+  }
+
+  public changeUser(user: User) {
+    const url = `${this.base_url}/users/${user.uid}`;
+    return this.http.put(url, user, this.headers);
   }
 }
