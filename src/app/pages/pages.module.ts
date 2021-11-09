@@ -19,6 +19,8 @@ import { UsersComponent } from './maintenance/users/users.component';
 import { DoctorsComponent } from './maintenance/doctors/doctors.component';
 import { HospitalsComponent } from './maintenance/hospitals/hospitals.component';
 
+import { PipesModule } from '../pipes/pipes.module';
+
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -51,6 +53,7 @@ import { HospitalsComponent } from './maintenance/hospitals/hospitals.component'
     SharedModule,
     ComponentsModule,
     AppRoutingModule,
+    PipesModule,
   ],
 })
 export class PagesModule {}
