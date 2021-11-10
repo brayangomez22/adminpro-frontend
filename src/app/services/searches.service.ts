@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { User } from '../models/user.model';
 import { Hospital } from '../models/hospital.model';
+import { Doctor } from '../models/doctor.model';
 
 @Injectable({
   providedIn: 'root',
@@ -49,6 +50,10 @@ export class SearchesService {
     return results;
   }
 
+  private transformDoctors(results: any[]): Doctor[] {
+    return results;
+  }
+
   public search(type: 'users' | 'doctors' | 'hospitals', term: string) {
     const url = `${this.base_url}/all/collection/${type}/${term}`;
     return this.http.get<any[]>(url, this.headers).pipe(
@@ -61,7 +66,7 @@ export class SearchesService {
             return this.transformHospitals(resp.results);
 
           case 'doctors':
-            return this.transformUsers(resp.results);
+            return this.transformDoctors(resp.results);
 
           default:
             return [];

@@ -2,13 +2,19 @@
   <div class="col-12">
     <div class="card">
       <div class="card-body">
-        <input type="text" class="form-control" placeholder="Search User..." />
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Search Doctor..."
+          (keyup)="search(txtTerm.value)"
+          #txtTerm
+        />
       </div>
     </div>
   </div>
 </div>
 
-<div class="row animated fadeIn fast">
+<div class="row animated fadeIn fast" *ngIf="loading">
   <div class="col-12">
     <div class="alert alert-info text-center">
       <h4 class="alert-heading">Loading</h4>
@@ -18,38 +24,56 @@
   </div>
 </div>
 
-<div class="row">
+<div class="row" *ngIf="!loading">
   <div class="col-12">
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title">Users</h4>
-        <h6 class="card-subtitle">Users registered in the application</h6>
+        <div class="row">
+          <div class="col-8">
+            <h4 class="card-title">Doctors {{ doctors.length }}</h4>
+            <h6 class="card-subtitle">Doctors registered in the application</h6>
+          </div>
+          <div class="col">
+            <div class="text-right">
+              <a routerLink="/dashboard/doctor/new" class="btn btn-primary">
+                <i class="fa fa-hospital-o"></i> Create Doctor
+              </a>
+            </div>
+          </div>
+        </div>
+
         <div class="table-responsive">
           <table class="table table-bordered">
             <thead>
               <tr>
-                <th>Avatar</th>
-                <th>Email</th>
-                <th>Name</th>
-                <th>Role</th>
-                <th>Auth</th>
-                <th class="text-nowrap">Actions</th>
+                <th class="w100 text-center">Avatar</th>
+                <th>name</th>
+                <th class="text-center w100 text-nowrap">Actions</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>Lunar probe project</td>
-                <td>Lunar probe project</td>
-                <td>Lunar probe project</td>
-                <td>Lunar probe project</td>
-                <td>Lunar probe project</td>
+              <tr *ngFor="let doctor of doctors">
+                <td class="text-center">
+                  <img
+                    class="avatar cursor"
+                    [src]="doctor.img | image: 'doctors'"
+                    [alt]="doctor.name"
+                    (click)="openModal(doctor)"
+                  />
+                </td>
+                <td>{{ doctor.name }}</td>
 
                 <td class="text-nowrap text-center">
-                  <a href="#" data-toggle="tooltip" data-original-title="Edit">
+                  <a
+                    [routerLink]="['/dashboard/doctor', doctor._id]"
+                    data-toggle="tooltip"
+                    data-original-title="Edit"
+                  >
                     <i class="fa fa-pencil text-inverse m-r-10"></i>
                   </a>
                   <a
-                    href="#"
+                    (click)="deleteDoctor(doctor)"
+                    class="cursor"
                     data-toggle="tooltip"
                     data-original-title="Delete"
                   >
@@ -60,10 +84,6 @@
             </tbody>
           </table>
         </div>
-
-        <button class="btn btn-secondary">Prev</button>
-        &nbsp;
-        <button class="btn btn-secondary">Next</button>
       </div>
     </div>
   </div>
