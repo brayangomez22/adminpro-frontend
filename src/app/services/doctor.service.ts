@@ -33,7 +33,14 @@ export class DoctorService {
       .pipe(map((resp: { ok: boolean; doctors: Doctor[] }) => resp.doctors));
   }
 
-  public createDoctor(doctor: Doctor) {
+  public loadDoctorById(id: string): Observable<Doctor> {
+    const url = `${this.base_url}/doctors/${id}`;
+    return this.http
+      .get<{ ok: boolean; doctor: Doctor }>(url, this.headers)
+      .pipe(map((resp: { ok: boolean; doctor: Doctor }) => resp.doctor));
+  }
+
+  public createDoctor(doctor: { name: string; hospital: string }) {
     return this.http.post(`${this.base_url}/doctors`, doctor, this.headers);
   }
 
