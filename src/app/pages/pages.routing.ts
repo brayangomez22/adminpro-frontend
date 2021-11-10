@@ -8,6 +8,7 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
 import { PromisesComponent } from './promises/promises.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
 import { ProfileComponent } from './profile/profile.component';
+import { SearchComponent } from './search/search.component';
 import { AuthGuard } from '../guards/auth.guard';
 
 // maintenance
@@ -27,6 +28,11 @@ const routes: Routes = [
         path: 'progress',
         component: ProgressComponent,
         data: { title: 'Progress' },
+      },
+      {
+        path: 'search/:term',
+        component: SearchComponent,
+        data: { title: 'Search' },
       },
       {
         path: 'graphOne',

@@ -21,6 +21,7 @@ import { HospitalsComponent } from './maintenance/hospitals/hospitals.component'
 
 import { PipesModule } from '../pipes/pipes.module';
 import { DoctorComponent } from './maintenance/doctors/doctor/doctor.component';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { DoctorComponent } from './maintenance/doctors/doctor/doctor.component';
     DoctorsComponent,
     HospitalsComponent,
     DoctorComponent,
+    SearchComponent,
   ],
   exports: [
     DashboardComponent,

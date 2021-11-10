@@ -74,4 +74,9 @@ export class SearchesService {
       })
     );
   }
+
+  public searchGlobal(term: string) {
+    const url = `${this.base_url}/all/${term}`;
+    return this.http.get(url, this.headers);
+  }
 }
